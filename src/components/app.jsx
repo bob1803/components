@@ -1,5 +1,7 @@
 import * as React from "react";
 import Header from "./header/header";
+import Logo from "./logo/logo";
+import "../styles/reset.less";
 
 export class App extends React.Component {
   constructor(p) {
@@ -9,8 +11,9 @@ export class App extends React.Component {
   render() {
     return (
       <div className="app">
-        Запуск моего app.jsx
-        <Header />
+        <Header>
+          <Logo />
+        </Header>
       </div>
     );
   }

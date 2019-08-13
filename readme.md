@@ -1,3 +1,1 @@
-npm init
-git init
-create and config .gitignore 
+_Import global styles to App.jsx_
