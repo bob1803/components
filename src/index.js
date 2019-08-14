@@ -1,5 +1,4 @@
-
-//import './reset.less'
+//import { Router } from 'react-router-dom';
 import * as ReactDom from 'react-dom'
 import { App } from './components/app.jsx'
 //import {queryStringToObject} from './helpers'
