@@ -3,9 +3,6 @@
 @backgroundItemHover:  rgba(170, 170, 170, 0.2);
 @backgroundItemSelected:  rgba(170, 170, 170, 0.4);
 
-.menu__container {
-}
-
 // full Menu
 
 .full-menu__container {
@@ -32,9 +29,6 @@ background-color: @backgroundItemHover;
 
 // min Menu
 
-.min-menu__container {
-}
-
 .min-menu__dropdown {
   width: 100%;
   display: flex;
@@ -58,7 +52,7 @@ background-color: @backgroundItemHover;
 }
 
 .min-menu__item-selected {
-  background-color: rgba(170, 170, 170, 0.4);
+  background-color: @backgroundItemSelected;
 }
 
 .min-menu__hamburger-container {
@@ -82,7 +76,7 @@ background-color: @backgroundItemHover;
 .min-menu__hamburger:before,
 .min-menu__hamburger:after {
   border-top: 2px solid @darkGray;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .min-menu__hamburger:before,
@@ -112,8 +106,6 @@ background-color: @backgroundItemHover;
 }
 
 .min-menu__hamburger.min-menu__dropdown-open:before {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
   transform: rotate(-45deg);
   top: 8px;
 }
