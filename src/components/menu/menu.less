@@ -1,12 +1,123 @@
+
+@darkGray: rgb(40, 40, 40);
+@backgroundItemHover:  rgba(170, 170, 170, 0.2);
+@backgroundItemSelected:  rgba(170, 170, 170, 0.4);
+
 .menu__container {
-    position: relative;
-    float: right;
-}
-.menu__item {
-    display: inline-block;
-    margin: 10px;
 }
 
-.menu__item-selected {
-    font-weight: bold;
+// full Menu
+
+.full-menu__container {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.full-menu__item {
+  display: inline-block;
+  padding: 10px;
+  font-weight: bold;
+  color: @darkGray;
+}
+
+.full-menu__item-selected .full-menu__item {
+  color: whitesmoke;
+  background-color: @backgroundItemSelected;
+}
+
+.full-menu__item:hover {
+background-color: @backgroundItemHover;
+}
+
+// min Menu
+
+.min-menu__container {
+}
+
+.min-menu__dropdown {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.min-menu__dropdown-item {
+  padding: 10px;
+  color: @darkGray;
+  font-weight: bold;
+}
+
+.min-menu__dropdown-item:hover {
+  background-color: @backgroundItemHover;
+}
+
+.min-menu__item-selected .min-menu__dropdown-item {
+  font-weight: bold;
+  color: whitesmoke;
+
+}
+
+.min-menu__item-selected {
+  background-color: rgba(170, 170, 170, 0.4);
+}
+
+.min-menu__hamburger-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 8px;
+}
+
+.min-menu__hamburger {
+  display: block;
+  font-size: 0;
+  background: none;
+  border: none;
+  width: 28px;
+  height: 25px;
+  position: relative;
+}
+
+.min-menu__hamburger,
+.min-menu__hamburger:before,
+.min-menu__hamburger:after {
+  border-top: 2px solid @darkGray;
+  transition: all 0.3s;
+}
+
+.min-menu__hamburger:before,
+.min-menu__hamburger:after {
+  position: absolute;
+  content: "";
+  display: block;
+  left: 0;
+  right: 0;
+}
+
+.min-menu__hamburger:before {
+  top: 7px;
+}
+
+.min-menu__hamburger:after {
+  top: 17px;
+}
+
+.min-menu__hamburger.min-menu__dropdown-open {
+  border-top-color: transparent;
+}
+
+.min-menu__hamburger.min-menu__dropdown-open:after {
+  transform: rotate(45deg);
+  top: 8px;
+}
+
+.min-menu__hamburger.min-menu__dropdown-open:before {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  top: 8px;
+}
+
+.hidden {
+  display: none;
 }

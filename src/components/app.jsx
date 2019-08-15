@@ -17,11 +17,10 @@ export class App extends React.Component {
 
   render() {
     return (
-      <Router >
-
+      <Router>
         <Header>
-          <Menu />
           <Logo />
+          <Menu minWidth={900} />
         </Header>
 
         <Route exact path="/" component={Home} />

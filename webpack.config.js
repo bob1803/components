@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const devEnv = 'development'
+const NODE_ENV = process.env.NODE_ENV || devEnv
 
 module.exports = {
   entry: "./src/index.js",
@@ -9,6 +11,7 @@ module.exports = {
     publicPath: "/",
     path: path.resolve(__dirname, "/dist")
   },
+  devtool: NODE_ENV === devEnv ? 'inline-source-map' : 'hidden-source-map',
   module: {
     rules: [
       {
@@ -17,6 +20,11 @@ module.exports = {
         use: [
            "babel-loader"
         ]
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: ["source-map-loader"],
+        enforce: "pre"
       },
       {
         test: /\.less$/,
