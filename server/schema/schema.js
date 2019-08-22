@@ -1,27 +1,33 @@
+const config = require(  "../../data/config.js");
+
 const graphql = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLSchema,
+  GraphQLList,
+ // GraphQLID
+} = graphql;
 
-const { GraphQLObjectType, GraphQLString, GraphQLSchema } = graphql;
-
-const MovieType = new GraphQLObjectType({
-  name: "Movie",
+const MenuType = new GraphQLObjectType({
+  name: "ItemMenu",
   fields: () => ({
-    id: { type: GraphQLString },
-    name: { type: GraphQLString },
-    genre: { type: GraphQLString }
+    title: { type: GraphQLString },
+    link: { type: GraphQLString }
   })
 });
 
 const Query = new GraphQLObjectType({
   name: "Query",
-  fields: {
-    movie: {
-      type: MovieType,
-      args: { id: { type: GraphQLString } },
-      resolve(parent, args) {}
+  fields: () => ({
+    menuConfig: {
+      type: new GraphQLList(MenuType),
+      resolve(parent, args) {
+          return config.menuConfig;
+      }
     }
-  }
+  })
 });
-
 module.exports = new GraphQLSchema({
   query: Query
 });
