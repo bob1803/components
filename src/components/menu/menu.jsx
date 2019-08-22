@@ -4,6 +4,8 @@ import { getViewportWidth } from "../../helpers";
 import "./menu.less";
 import { observable, useStrict, action } from "mobx";
 import { observer } from "mobx-react";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 useStrict(true);
 
@@ -25,38 +27,27 @@ class MenuState {
   }
 }
 
-const menuConfig = [
-  {
-    title: "Home",
-    link: "/"
-  },
-  {
-    title: "About",
-    link: "/about"
-  },
-  {
-    title: "Contact",
-    link: "/contact"
-  },
-  {
-    title: "Blog",
-    link: "/blog"
+const GET_CONFIG = gql`
+  query {
+    menuConfig {
+      title
+      link
+    }
   }
-];
+`;
 
 class FullMenu extends React.Component {
   render() {
     return (
       <div className="full-menu__container">
-        {menuConfig.map((item, index) => (
+        {this.props.menuConfig.map((item, index) => (
           <NavLink
+            key={index}
             exact
             to={item.link}
             activeClassName="full-menu__item-selected"
           >
-            <div key={index} className="full-menu__item">
-              {item.title}
-            </div>
+            <div className="full-menu__item">{item.title}</div>
           </NavLink>
         ))}
       </div>
@@ -109,7 +100,7 @@ class MinMenu extends React.Component {
             !this._state.open ? "hidden" : null
           }`}
         >
-          {menuConfig.map((item, index) => (
+          {this.props.menuConfig.map((item, index) => (
             <NavLink
               exact
               to={item.link}
@@ -125,10 +116,11 @@ class MinMenu extends React.Component {
   }
 }
 
-export default class Menu extends React.Component {
+class MainMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = { minimized: true }; //minimized = true - view gamburger
+    this.state.config = this.props.data.menuConfig;
   }
 
   _resize = () => {
@@ -149,8 +141,17 @@ export default class Menu extends React.Component {
   render() {
     return (
       <div className="menu__container">
-        {this.state.minimized ? <MinMenu /> : <FullMenu />}
+        {this.state.minimized ? 
+        <MinMenu menuConfig={this.props.data.menuConfig}/> :
+         <FullMenu menuConfig={this.props.data.menuConfig}/>}
       </div>
     );
   }
+}
+
+export default function Menu() {
+  const { data, loading, error } = useQuery(GET_CONFIG);
+  if (loading) return <p></p>;
+  if (error) return <p>ERROR</p>;
+  return <MainMenu data={data} />;
 }
