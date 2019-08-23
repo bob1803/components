@@ -10,30 +10,85 @@ import About from "./about/about";
 import Contact from "./contact/contact";
 import Blog from "./blog/blog";
 import "../styles/reset.less";
+import gql from "graphql-tag";
+import { observable, useStrict, action } from "mobx";
+import { observer } from "mobx-react";
+
+useStrict(true);
 
 const client = new ApolloClient({
   uri: "http://localhost:3005/graphql"
 });
 
+class AppState {
+  constructor() {
+    this.loading = true;
+    this.queryConfig = null;
+  }
+  @observable
+  loading;
+
+  @observable
+  queryConfig;
+
+  @action
+  setLoading() {
+    this.loading = true;
+  }
+
+  @action
+  setDownloaded() {
+    this.loading = false;
+  }
+
+  @action
+  setQueryConfig(newConfig) {
+    this.queryConfig = newConfig;
+  }
+}
+
+@observer
 export class App extends React.Component {
-  constructor(p) {
-    super(p);
+  constructor(props) {
+    super(props);
+    this._state = new AppState();
+  }
+  componentDidMount() {
+    client.query({
+      query: gql`
+        {
+          menuConfig {
+            title
+            link
+          }
+        }
+      `
+    }).then(result => {
+      this._state.setQueryConfig(result.data);
+      this._state.setDownloaded();
+    });
   }
 
   render() {
-    return (
-      <ApolloProvider client={client}>
-        <Router>
-          <Header>
-            <Logo />
-            <Menu minWidth={900} />
-          </Header>
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/blog" component={Blog} />
-        </Router>
-      </ApolloProvider>
-    );
-  }
-}
+    if (this._state.loading) {
+      return <p>Loading</p>;
+    }else{
+      return (
+        <ApolloProvider client={client}>
+          <Router>
+            <Header>
+              <Logo />
+              <Menu minWidth={900} 
+              config={this._state.queryConfig.menuConfig}/>
+            </Header>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/blog" component={Blog} />
+          </Router>
+        </ApolloProvider>
+      );
+    };
+    
+  };
+};

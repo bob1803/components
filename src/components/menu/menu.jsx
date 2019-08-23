@@ -2,10 +2,9 @@ import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { getViewportWidth } from "../../helpers";
 import "./menu.less";
-import { observable, useStrict, action } from "mobx";
+import { observable, useStrict, action, toJS } from "mobx";
 import { observer } from "mobx-react";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+
 
 useStrict(true);
 
@@ -26,15 +25,6 @@ class MenuState {
     this.open = !this.open;
   }
 }
-
-const GET_CONFIG = gql`
-  query {
-    menuConfig {
-      title
-      link
-    }
-  }
-`;
 
 class FullMenu extends React.Component {
   render() {
@@ -116,11 +106,11 @@ class MinMenu extends React.Component {
   }
 }
 
-class MainMenu extends React.Component {
+ export default class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = { minimized: true }; //minimized = true - view gamburger
-    this.state.config = this.props.data.menuConfig;
+    //this.state.config = this.props.data.menuConfig;
   }
 
   _resize = () => {
@@ -142,16 +132,9 @@ class MainMenu extends React.Component {
     return (
       <div className="menu__container">
         {this.state.minimized ? 
-        <MinMenu menuConfig={this.props.data.menuConfig}/> :
-         <FullMenu menuConfig={this.props.data.menuConfig}/>}
+        <MinMenu menuConfig={this.props.config}/> :
+         <FullMenu menuConfig={this.props.config}/>}
       </div>
     );
   }
-}
-
-export default function Menu() {
-  const { data, loading, error } = useQuery(GET_CONFIG);
-  if (loading) return <p></p>;
-  if (error) return <p>ERROR</p>;
-  return <MainMenu data={data} />;
 }
