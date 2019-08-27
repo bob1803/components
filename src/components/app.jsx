@@ -1,7 +1,8 @@
 import * as React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter, Route, Router} from 'react-router-dom';
+//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Menu from "./menu/menu";
 import Header from "./header/header";
 import Logo from "./logo/logo";
@@ -54,41 +55,44 @@ export class App extends React.Component {
     this._state = new AppState();
   }
   componentDidMount() {
-    client.query({
-      query: gql`
-        {
-          menuConfig {
-            title
-            link
+    client
+      .query({
+        query: gql`
+          {
+            menuConfig {
+              title
+              link
+            }
           }
-        }
-      `
-    }).then(result => {
-      this._state.setQueryConfig(result.data);
-      this._state.setDownloaded();
-    });
+        `
+      })
+      .then(result => {
+        this._state.setQueryConfig(result.data);
+        this._state.setDownloaded();
+      });
   }
 
   render() {
     if (this._state.loading) {
       return <p>Loading</p>;
-    }else{
+    } else {
       return (
         <ApolloProvider client={client}>
-          <Router>
+          <HashRouter>
             <Header>
               <Logo />
-              <Menu minWidth={900} 
-              config={this._state.queryConfig.menuConfig}/>
+              <Menu
+                minWidth={900}
+                config={this._state.queryConfig.menuConfig}
+              />
             </Header>
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
             <Route path="/blog" component={Blog} />
-          </Router>
+          </HashRouter>
         </ApolloProvider>
       );
-    };
-    
-  };
-};
+    }
+  }
+}

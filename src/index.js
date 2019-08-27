@@ -1,11 +1,8 @@
-//import { Router } from 'react-router-dom';
-import * as ReactDom from 'react-dom'
-import { App } from './components/app.jsx'
-//import {queryStringToObject} from './helpers'
-import * as React from 'react'
-//import { appState } from './app-state.js'
-//import { Provider } from 'mobx-react'
-//import { initDataFetcher } from './data-fetcher'
+import * as ReactDom from 'react-dom';
+import { App } from './components/app.jsx';
+require('./images/favicon.ico');
+require('./styles/reset.less');
+import * as React from 'react';
 
 const appNode = document.getElementById('app');
 
@@ -14,4 +11,4 @@ ReactDom.render(
     <App/>
 , appNode);
 
-module.hot.accept();
+//module.hot.accept();
