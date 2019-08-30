@@ -11,6 +11,10 @@ const Vars = {
     darkBlue_M: "rgb(100,100,130)", //  Medium
     darkBlue_L: "rgb(201,201,245)" // Light
   },
+  colorLogo: {
+    colorLogo: "rgb(175, 225, 145)",
+    colorLogoHover: "rgb(145, 170, 130)"
+  },
 
   // FONT  #########################
   fontWeight: {
@@ -26,6 +30,11 @@ const Vars = {
 
   //  PADDING  ##############################
   btnPadding: {
+    L: "24px", // Large
+    M: "16px", // Medium
+    S: "8px" // Small
+  },
+  padding: {
     L: "24px", // Large
     M: "16px", // Medium
     S: "8px" // Small
@@ -53,4 +62,11 @@ const ConfigBtnBlueM = {
   buttonLink: "/about"
 };
 
-export { Vars, ConfigBtnBlueM };
+const ConfigLogo = {
+  colorLogo: Vars.colorLogo.colorLogo,
+  colorLogoHover: Vars.colorLogo.colorLogoHover,
+  padding: Vars.padding.S,
+  fontWeight: Vars.fontWeight.bold
+};
+
+export { Vars, ConfigBtnBlueM, ConfigLogo };
