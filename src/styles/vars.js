@@ -40,6 +40,13 @@ const Vars = {
     S: "8px" // Small
   },
 
+  //  MARGIN  ##################################
+  marginInline: {
+    L: "24px", // Large
+    M: "16px", // Medium
+    S: "8px" // Small
+  },
+
   //  BORDER RADIUS
   borderRadiusBtn: {
     L: "12px", // Large
@@ -69,4 +76,10 @@ const ConfigLogo = {
   fontWeight: Vars.fontWeight.bold
 };
 
-export { Vars, ConfigBtnBlueM, ConfigLogo };
+// ...Cnf -> config
+const linkSmallCnf = {
+  text: "I'm Link! Go to About.",
+  link: "/about"
+};
+
+export { Vars, ConfigBtnBlueM, ConfigLogo, linkSmallCnf };

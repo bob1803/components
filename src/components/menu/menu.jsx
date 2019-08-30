@@ -30,6 +30,8 @@ class FullMenu extends React.Component {
   render() {
     return (
       <div className="full-menu__container">
+        <div className="full-menu__wrap-item">
+
         {this.props.menuConfig.map((item, index) => (
           <NavLink
             key={index}
@@ -40,6 +42,7 @@ class FullMenu extends React.Component {
             <div className="full-menu__item">{item.title}</div>
           </NavLink>
         ))}
+        </div>
       </div>
     );
   }
@@ -130,11 +133,9 @@ class MinMenu extends React.Component {
 
   render() {
     return (
-      <div className="menu__container">
-        {this.state.minimized ? 
+        this.state.minimized ? 
         <MinMenu menuConfig={this.props.config}/> :
-         <FullMenu menuConfig={this.props.config}/>}
-      </div>
+         <FullMenu menuConfig={this.props.config}/>
     );
   }
 }

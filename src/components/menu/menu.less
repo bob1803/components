@@ -6,16 +6,25 @@
 // full Menu
 
 .full-menu__container {
+  height: 100%;
   position: absolute;
   right: 0;
   top: 0;
 }
 
+.full-menu__wrap-item {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
 .full-menu__item {
-  display: inline-block;
-  padding: 10px;
+  height: 100%;
   font-weight: bold;
   color: @darkGray;
+  margin-left: 16px;
+  
 }
 
 .full-menu__item-selected .full-menu__item {

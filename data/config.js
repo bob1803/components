@@ -16,5 +16,6 @@ module.exports = {
           title: "Blog",
           link: "/blog"
         }
+       
       ]
 };
