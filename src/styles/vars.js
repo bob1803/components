@@ -77,9 +77,6 @@ const ConfigLogo = {
 };
 
 // ...Cnf -> config
-const linkSmallCnf = {
-  text: "I'm Link! Go to About.",
-  link: "/about"
-};
 
-export { Vars, ConfigBtnBlueM, ConfigLogo, linkSmallCnf };
+
+export { Vars, ConfigBtnBlueM, ConfigLogo };
