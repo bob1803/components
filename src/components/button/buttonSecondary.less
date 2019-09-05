@@ -1,0 +1,17 @@
+@import "../../styles/variables.less";
+
+.btn-secondary__container {
+    width: 100%;
+    line-height: @btnSecondaryLh;
+    font-weight: @btnSecondaryFw;
+    border: 1px solid @btnSecondaryBorderClr;
+    background-color: @btnSecondaryBgClr;
+    color: @btnSecondaryClr;
+    border-radius: @btnSecondaryBorderR;
+  }
+  .btn-secondary__container:hover {
+      color: fadeout(@btnSecondaryClr, 40%);
+      border-color: fadeout(@btnSecondaryBorderClr, 40%);
+      background-color: fadeout(@btnSecondaryClr, 90%);
+  }
+  

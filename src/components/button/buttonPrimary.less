@@ -1,0 +1,15 @@
+@import "../../styles/variables.less";
+
+.btn-primary__container {
+  width: 100%;
+  line-height: @btnPrymaryLh;
+  font-weight: @btnPrymaryFw;
+  border: 1px solid @btnPrymaryBorderClr;
+  background-color: @btnPrymaryBgClr;
+  color: @btnPrimaryClr;
+  border-radius: @btnPrimaryBorderR;
+}
+.btn-primary__container:hover {
+    background-color: fadeout(@btnPrymaryBgClr, 30%);
+    border-color: fadeout(@btnPrymaryBorderClr, 30%);
+}

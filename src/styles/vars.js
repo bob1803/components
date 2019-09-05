@@ -1,11 +1,37 @@
 const Vars = {
   // TEXT COLOR ###########################
   color: {
+    yellowBase: "#F3A72E",
+    yellowSmooth: "#FCF3D7",
+    greenBase: "#2FA84F",
+    greenSmooth: "#DCF7E3",
+    redBase: "#EA3D2F",
+    redSmooth:"#FEE4E2",
+    blueBase: "#367BF5",
+    blueSmooth: "#E6EFFF",
+    tealBase: "#069697",
+    tealSmooth: "#DAF5F2",
+    gray90: "#3E4345",
+    gray80: "#5E6366",
+    gray60: "#919699",
+    gray40: "#C6CACC",
+    gray30: "#E3E5E6",
+    gray20: "#F1F3F4",
+    gray10: "#F7F9FA",
+
+
+
+
+
+
+    
+
     darkGray_D: "rgb(40, 40, 40)", // Dark
     blue_D: "rgb(5, 45, 145)", // Dark
     blue_M: "rgb(35, 95, 250)", // Medium
     blue_L: "rgb(200, 213, 245)" // Light
   },
+
   colorBtn: {
     darkBlue_D: "rgb(30,40,90)", // Dark
     darkBlue_M: "rgb(100,100,130)", //  Medium
@@ -17,6 +43,13 @@ const Vars = {
   },
 
   // FONT  #########################
+
+fontSize: {
+    
+},
+
+
+
   fontWeight: {
     bold: "bold"
   },

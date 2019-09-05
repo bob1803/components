@@ -14,7 +14,7 @@ import "../styles/reset.less";
 import gql from "graphql-tag";
 import { observable, useStrict, action } from "mobx";
 import { observer } from "mobx-react";
-
+import "./app.less";
 useStrict(true);
 
 const client = new ApolloClient({
