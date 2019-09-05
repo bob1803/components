@@ -6,7 +6,7 @@ export default class LinkSmall extends React.Component {
   render() {
     return (
       <Link to={this.props.link}>
-        <a className="link-small">{this.props.children}</a>
+        <span className="link-small">{this.props.children}</span>
       </Link>
     );
   }

@@ -1,10 +1,11 @@
 @import "../../styles/variables.less";
+@import "../../styles/mixins.less";
 
 .link-small {
+    .fontXS;
     color: @linkSmallClr;
-    font-size: @linkSmallFs;
 }
 
 .link-small:hover {
-    color: lighten(@linkSmallClr, 20%);
+    color: lighten(@linkSmallClr, 16%);
 }
