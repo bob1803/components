@@ -14,7 +14,7 @@ export default class Home extends React.Component {
         <LinkSmall link="/about">I'm Link! Go to About!</LinkSmall>
         <ButtonPrimary link="/about">Go to About</ButtonPrimary>
         <LinkLarge link="/blog">I'M Link too! Go to Blog</LinkLarge>
-        <ButtonSecondary link="/contact">Go to About</ButtonSecondary>
+        <ButtonSecondary link="/contact">Go to Contact</ButtonSecondary>
         <div>HOME</div>
       </div>
     );
