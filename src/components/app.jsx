@@ -5,7 +5,7 @@ import { HashRouter, Route, Router} from 'react-router-dom';
 //import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Menu from "./menu/menu";
 import Header from "./header/header";
-import Logo from "./logo/logo";
+import LogoMedium from "./logo/logoMedium";
 import Home from "./home/home";
 import About from "./about/about";
 import Contact from "./contact/contact";
@@ -80,7 +80,7 @@ export class App extends React.Component {
         <ApolloProvider client={client}>
           <HashRouter>
             <Header>
-              <Logo />
+              <LogoMedium />
               <Menu
                 minWidth={900}
                 config={this._state.queryConfig.menuConfig}
