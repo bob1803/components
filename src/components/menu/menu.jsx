@@ -39,7 +39,9 @@ class FullMenu extends React.Component {
             to={item.link}
             activeClassName="full-menu__item-selected"
           >
-            <div className="full-menu__item">{item.title}</div>
+            <div className="full-menu__item">
+            <span>{item.title}</span>
+            </div>
           </NavLink>
         ))}
         </div>
@@ -83,14 +85,14 @@ class MinMenu extends React.Component {
         >
           <span
             className={`min-menu__hamburger ${
-              this._state.open ? "min-menu__dropdown-open" : null
+              this._state.open ? "min-menu__dropdown-open" : ""
             }`}
           />
         </div>
 
         <div
           className={`min-menu__dropdown ${
-            !this._state.open ? "hidden" : null
+            !this._state.open ? "min-menu__dropdown-clossed" : "min-menu__dropdown-opened"
           }`}
         >
           {this.props.menuConfig.map((item, index) => (
@@ -100,7 +102,7 @@ class MinMenu extends React.Component {
               activeClassName="min-menu__item-selected"
               key={index}
             >
-              <div className="min-menu__dropdown-item">{item.title}</div>
+              <div className={`min-menu__dropdown-item ${index === 0 ? "min-menu__dropdown-item-first" : ""}`}>{item.title}</div>
             </NavLink>
           ))}
         </div>

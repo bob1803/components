@@ -1,10 +1,6 @@
-
-@darkGray: rgb(40, 40, 40);
-@backgroundItemHover:  rgba(170, 170, 170, 0.2);
-@backgroundItemSelected:  rgba(170, 170, 170, 0.4);
+@import "../../styles/variables.less";
 
 // full Menu
-
 .full-menu__container {
   height: 100%;
   position: absolute;
@@ -14,54 +10,68 @@
 
 .full-menu__wrap-item {
   height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
+  .flexRowStretch;
 }
 
 .full-menu__item {
+  .fontMenu;
+  .flexRowCenter;
   height: 100%;
-  font-weight: bold;
-  color: @darkGray;
-  margin-left: 16px;
-  
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .full-menu__item-selected .full-menu__item {
-  color: whitesmoke;
-  background-color: @backgroundItemSelected;
+  color: @gray20;
 }
 
 .full-menu__item:hover {
-background-color: @backgroundItemHover;
+  background-color: fadeout(@gray40, 60%);
+  transition: background-color 0.5s;
 }
 
 // min Menu
 
 .min-menu__dropdown {
+  .flexColumn;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  height: auto;
+  background-color: fadeout(@menuSlateGray, 4%);
+  position: absolute;
 }
 
 .min-menu__dropdown-item {
+  .fontMenu;
+  box-sizing: border-box;
   padding: 10px;
-  color: @darkGray;
-  font-weight: bold;
+  color: @gray90;
+  border-bottom: 1px solid fadeout(@gray40, 80%);
 }
 
 .min-menu__dropdown-item:hover {
-  background-color: @backgroundItemHover;
+  background-color: fadeout(@gray40, 80%);
+  color: fadein(@gray90, 80%);
+}
+.min-menu__dropdown-item-first {
+  border-top: 1px solid fadeout(@gray40, 80%);
 }
 
 .min-menu__item-selected .min-menu__dropdown-item {
-  font-weight: bold;
-  color: whitesmoke;
-
+  color: @gray20;
 }
 
-.min-menu__item-selected {
-  background-color: @backgroundItemSelected;
+.min-menu__dropdown-clossed .min-menu__dropdown-item {
+  height: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s, padding 0.3s;
+}
+
+.min-menu__dropdown-opened .min-menu__dropdown-item {
+  transition: max-height 0.3s, padding 0.3s, background-color 0.3s, color 0.3s;
+  max-height: 60px;
 }
 
 .min-menu__hamburger-container {
@@ -79,12 +89,13 @@ background-color: @backgroundItemHover;
   width: 28px;
   height: 25px;
   position: relative;
+  margin-top: 6px;
 }
 
 .min-menu__hamburger,
 .min-menu__hamburger:before,
 .min-menu__hamburger:after {
-  border-top: 2px solid @darkGray;
+  border-top: 2px solid @gray90;
   transition: all 0.2s;
 }
 
@@ -117,8 +128,4 @@ background-color: @backgroundItemHover;
 .min-menu__hamburger.min-menu__dropdown-open:before {
   transform: rotate(-45deg);
   top: 8px;
-}
-
-.hidden {
-  display: none;
 }

@@ -19,6 +19,9 @@
 @gray10: #f7f9fa;
 @white: #ffffff;
 
+//  menu    &&&&&&&&&&&&&&&&
+@menuSlateGray: #666e92;
+
 @linkSmallClr: @blueBase;
 @linkLargeClr: @blueBase;
 
@@ -29,16 +32,16 @@
 
 // BORDER  ################################
 //...R -> radius
-@btnPrymaryBorderClr:  @blueBase;
+@btnPrymaryBorderClr: @blueBase;
 @btnPrimaryBorderR: 8px;
-@btnSecondaryBorderClr:  @blueBase;
+@btnSecondaryBorderClr: @blueBase;
 @btnSecondaryBorderR: 8px;
 
 //  FONTS   ##########################
 
 //  font family     ////////////////////
 //@fontFamilyText: 'Quicksand';
-@fontFamilyBtn: 'Roboto';
+@fontFamilyBtn: "Roboto";
 
 //  font size   ///////////////////////
 @fontSizeXL: 96px;
@@ -49,7 +52,6 @@
 @fontSizeXS: 20px;
 @fontSizeXXS: 16px;
 @fontSizeXXXS: 14px;
-
 
 //  font Style  //////////////////////
 @fontStyleBold: bold;
@@ -102,7 +104,6 @@
 @marginInlineS: @marginS;
 @marginInlineXS: @marginXS;
 
-
 ///////////////////////////////////
 /////////////////////////////////
 @linkSmallFs: @fontSizeXXS;
@@ -114,67 +115,94 @@
 @btnSecondaryLh: 220%;
 @btnLighten: 10%;
 
-
-
 //    MIXINS CLASSES    ##########################
 
 //    FONT MIXINS       //////////////////////////
 .fontXL {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: 12px;
-    font-size: 96px;
-    line-height: 120px;
-    letter-spacing: @letterSpacingXS;
-  }
-  
-  .fontL {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: 12px;
-    font-size: 60px;
-    line-height: 75px;
-  }
-  
-  .fontM {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 48px;
-    line-height: 60px;
-  }
-  
-  .fontXM {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 34px;
-    line-height: 42px;
-    letter-spacing: 0.25px;
-  }
-  
-  .fontM {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 30px;
-  }
-  
-  .fontS {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 28px;
-    letter-spacing: 0.15px;
-  }
-  
-  .fontXS {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.44px;
-  }
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 12px;
+  font-size: 96px;
+  line-height: 120px;
+  letter-spacing: @letterSpacingXS;
+}
+
+.fontL {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 12px;
+  font-size: 60px;
+  line-height: 75px;
+}
+
+.fontM {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 60px;
+}
+
+.fontXM {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 42px;
+  letter-spacing: 0.25px;
+}
+
+.fontM {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.fontS {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;
+}
+
+.fontXS {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.44px;
+}
+
+.fontMenu {
+  .fontXS;
+  font-weight: bold;
+}
+
+//    lAYOUT      #########################
+.flexRowStretch {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.flexRowCenter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
