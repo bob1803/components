@@ -1,7 +1,5 @@
 import React from "react";
 import "./home.less";
-//import ButtonText from "../buttonText/buttonText";
-import { ConfigBtnBlueM } from "../../styles/vars";
 import LinkSmall from "../link/linkSmall";
 import LinkLarge from "../link/linkLarge";
 import ButtonPrimary from "../button/buttonPrimary";
