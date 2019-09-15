@@ -2,9 +2,28 @@
 
 .link-small {
     .fontXS;
-    color: @linkSmallClr;
 }
 
-.link-small:hover {
-    color: lighten(@linkSmallClr, 16%);
+.link-small__primary {
+    color: @linkSmallClrPrimary;
 }
+
+.link-small__primary:hover {
+    color: lighten(@linkSmallClrPrimary, 16%);
+}
+
+.link-small__secondary {
+    color: @linkSmallClrSecondary;
+}
+
+.link-small__secondary:hover {
+    color: darken(@linkSmallClrSecondary, 16%);
+}
+
+.link-small__primary,
+.link-small__primary:hover,
+.link-small__secondary,
+.link-small__secondary:hover {
+    transition: color .15s;
+}
+
