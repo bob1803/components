@@ -1,0 +1,145 @@
+@import "../../styles/variables.less";
+
+.swiper_container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    box-sizing: border-box;
+  }
+  
+  .swiper_viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  .swiper_wrap_content_arrow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .swiper_content {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .swiper_animation {
+    transition: margin-left 0.25s;
+  }
+  
+  .swiper_animation_none {
+    transition: none;
+  }
+  
+  .swiper_shadow_left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    box-shadow: 1px 0px 14px 1px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  .swiper_shadow_right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    box-shadow: -1px 0px 14px 1px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  .swiper_inactiveArrow {
+    height: 29px;
+    width: 29px;
+    border-radius: 50%;
+    background-color: rgba(99, 100, 100, 0.05);
+  }
+  
+  .swiper_inactiveArrow > .arrow_ico {
+    fill: rgba(99, 100, 100, 0.3);
+  }
+  
+  .swiper_arrow {
+    height: 29px;
+    width: 29px;
+    border-radius: 50%;
+    background-color: rgba(99, 100, 100, 0.1);
+  }
+  
+  .swiper_arrow > .arrow_ico {
+    fill: rgba(99, 100, 100, 0.6);
+  }
+  
+  .swiper_arrow:hover > .arrow_ico {
+    fill: rgba(99, 100, 100, 1);
+  }
+  
+  .swiper_arrow:hover {
+    background-color: rgba(99, 100, 100, 0.2);
+    cursor: pointer;
+  }
+  
+  .swiper_arrow_prev {
+    margin-right: 8px;
+  }
+  
+  .swiper_arrow_next {
+    margin-left: 8px;
+  }
+  
+  .swiper_wrap_dots {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .swiper_dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(99, 100, 100, 0.5);
+    margin: 16px 8px;
+  }
+  .swiper_dot:hover {
+    background-color: rgba(99, 100, 100, 0.7);
+    cursor: pointer;
+  }
+  
+  .swiper_dotActive {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(99, 100, 100, 1);
+    margin: 16px 8px;
+  }
+  
+  @media (max-width: 780px) {
+    .swiper_arrow,
+    .swiper_inactiveArrow {
+      display: none;
+    }
+  
+    .swiper_shadow_left {
+      box-shadow: none;
+    }
+  
+    .swiper_shadow_right {
+      box-shadow: none;
+    }
+  
+    .swiper_shadow_right_left {
+      box-shadow: none;
+    }
+  }
