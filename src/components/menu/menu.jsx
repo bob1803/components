@@ -1,10 +1,9 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-import { getViewportWidth } from "../../helpers";
+//import { getViewportWidth } from "../../helpers";
 import "./menu.less";
 import { observable, useStrict, action, toJS } from "mobx";
 import { observer } from "mobx-react";
-
 
 useStrict(true);
 
@@ -26,32 +25,9 @@ class MenuState {
   }
 }
 
-class FullMenu extends React.Component {
-  render() {
-    return (
-      <div className="full-menu__container">
-        <div className="full-menu__wrap-item">
-
-        {this.props.menuConfig.map((item, index) => (
-          <NavLink
-            key={index}
-            exact
-            to={item.link}
-            activeClassName="full-menu__item-selected"
-          >
-            <div className="full-menu__item">
-            <span>{item.title}</span>
-            </div>
-          </NavLink>
-        ))}
-        </div>
-      </div>
-    );
-  }
-}
 
 @observer
-class MinMenu extends React.Component {
+export default class Menu extends React.Component {
   constructor(props) {
     super(props);
     this._state = new MenuState();
@@ -78,7 +54,26 @@ class MinMenu extends React.Component {
 
   render() {
     return (
-      <div className="min-menu__container">
+      <div className="menu__container">
+        
+        <div className="full-menu__container">
+          <div className="full-menu__wrap-item">
+            {this.props.config.map((item, index) => (
+              <NavLink
+                key={index}
+                exact
+                to={item.link}
+                activeClassName="full-menu__item-selected"
+              >
+                <div className="full-menu__item">
+                  <span>{item.title}</span>
+                </div>
+              </NavLink>
+            ))}
+          </div>
+        </div>
+
+        <div className="min-menu__container">
         <div
           className="min-menu__hamburger-container"
           onClick={this._handlerHamburgerClick}
@@ -92,52 +87,30 @@ class MinMenu extends React.Component {
 
         <div
           className={`min-menu__dropdown ${
-            !this._state.open ? "min-menu__dropdown-clossed" : "min-menu__dropdown-opened"
+            !this._state.open
+              ? "min-menu__dropdown-clossed"
+              : "min-menu__dropdown-opened"
           }`}
         >
-          {this.props.menuConfig.map((item, index) => (
+          {this.props.config.map((item, index) => (
             <NavLink
               exact
               to={item.link}
               activeClassName="min-menu__item-selected"
               key={index}
             >
-              <div className={`min-menu__dropdown-item ${index === 0 ? "min-menu__dropdown-item-first" : ""}`}>{item.title}</div>
+              <div
+                className={`min-menu__dropdown-item ${
+                  index === 0 ? "min-menu__dropdown-item-first" : ""
+                }`}
+              >
+                {item.title}
+              </div>
             </NavLink>
           ))}
         </div>
       </div>
-    );
-  }
-}
-
- export default class Menu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { minimized: true }; //minimized = true - view gamburger
-    //this.state.config = this.props.data.menuConfig;
-  }
-
-  _resize = () => {
-    let newMinimizedValue =
-      this.props.minWidth > getViewportWidth() ? true : false;
-    this.setState({ minimized: newMinimizedValue });
-  };
-
-  componentDidMount() {
-    window.addEventListener("resize", this._resize, false);
-    this._resize(); //initial the view menu
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this._resize);
-  }
-
-  render() {
-    return (
-        this.state.minimized ? 
-        <MinMenu menuConfig={this.props.config}/> :
-         <FullMenu menuConfig={this.props.config}/>
+      </div>
     );
   }
 }

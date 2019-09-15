@@ -1,11 +1,17 @@
 @import "../../styles/variables.less";
 
+//  Menu
+.menu__container {
+  height: 100%;
+  color: green;
+}
+
 // full Menu
 .full-menu__container {
   height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
+  @media (max-width: @laptopMedia) {
+    display: none;
+  }
 }
 
 .full-menu__wrap-item {
@@ -16,28 +22,38 @@
 .full-menu__item {
   .fontMenu;
   .flexRowCenter;
+  color: @gray100;
   height: 100%;
   padding: 0 12px;
   box-sizing: border-box;
 }
 
 .full-menu__item-selected .full-menu__item {
-  color: @gray20;
+  color: lighten(@gray100, 70%);
+  transition: color 0.3s;
 }
 
 .full-menu__item:hover {
-  background-color: fadeout(@gray40, 60%);
+  color: lighten(@gray100, 60%);
   transition: background-color 0.5s;
 }
 
 // min Menu
+.min-menu__container {
+  height: 100%;
+  @media (min-width: @laptopMedia) {
+    display: none;
+  }
+}
 
 .min-menu__dropdown {
   .flexColumn;
-  width: 100%;
+  width: 100vw;
   height: auto;
   background-color: fadeout(@menuSlateGray, 4%);
   position: absolute;
+  top: 100%;
+  left: 0;
 }
 
 .min-menu__dropdown-item {
@@ -74,11 +90,9 @@
   max-height: 60px;
 }
 
+//  hamburger 
 .min-menu__hamburger-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 8px;
+  margin-left: 16px;
 }
 
 .min-menu__hamburger {
