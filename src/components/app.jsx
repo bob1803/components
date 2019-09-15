@@ -10,6 +10,7 @@ import Home from "./home/home";
 import About from "./about/about";
 import Contact from "./contact/contact";
 import Blog from "./blog/blog";
+import Footer from "./footer/footer";
 import "../styles/reset.less";
 import gql from "graphql-tag";
 import { observable, useStrict, action } from "mobx";
@@ -90,6 +91,7 @@ export class App extends React.Component {
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
             <Route path="/blog" component={Blog} />
+            <Footer></Footer>
           </HashRouter>
         </ApolloProvider>
       );
