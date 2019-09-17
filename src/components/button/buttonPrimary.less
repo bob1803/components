@@ -15,6 +15,12 @@
   border-radius: @btnPrimaryBorderR;
 }
 .btn-primary__container:hover {
-    background-color: lighten(@btnPrymaryBgClr, @btnLighten);
-    border-color: lighten(@btnPrymaryBorderClr, @btnLighten);
+    background-color: lighten(@btnPrymaryBgClr, 5%);
+    border-color: lighten(@btnPrymaryBorderClr, 5%);
+    transition:  background-color .3s, border-color .3s;
+}
+
+.btn-primary__container:active,
+.btn-primary__container:focus {
+  outline: 0;
 }
