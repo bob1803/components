@@ -22,7 +22,7 @@ export default class CardMedium extends React.Component {
             ></ImgRectangle>
           </div>
           <div className="card-medium__text-container">
-            <ParagrafMedium text={this.props.config.text}></ParagrafMedium>
+            <ParagrafMedium>{this.props.config.text}</ParagrafMedium>
           </div>
         </div>
       </div>

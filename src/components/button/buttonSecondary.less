@@ -11,10 +11,10 @@
   letter-spacing: @letterSpacingXL;
   text-transform: uppercase;
   border: 1px solid @btnSecondaryBorderClr;
-  background-color: @btnSecondaryBgClr;
   border-radius: @btnSecondaryBorderR;
+  background-color: transparent;
 }
 .btn-secondary__container:hover {
-  border-color: lighten(@btnSecondaryBorderClr, @btnLighten);
-  background-color: @blueSmooth;
+  border-color: lighten(@btnSecondaryBorderClr, 15%);
+  color: lighten(@btnSecondaryBorderClr, 15%)
 }

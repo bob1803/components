@@ -1,0 +1,34 @@
+@import "../../styles/variables.less";
+
+.description-img__container {
+  .flexRowCenter;
+  background-color: bisque;
+}
+
+.description-img__text-container {
+  .flexColumnCenter;
+  width: 50%;
+  padding: @marginStackM 5%;
+  box-sizing: border-box;
+}
+
+.description-img__text {
+  margin-bottom: @marginStackL;
+}
+
+.description-img__img-container {
+  width: 50%;
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 780px) {
+    .description-img__container {
+        flex-direction: column-reverse;
+    }
+
+    .description-img__text-container,
+    .description-img__img-container {
+        width: 100%;
+    }
+}
