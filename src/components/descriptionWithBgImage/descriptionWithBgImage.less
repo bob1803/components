@@ -1,0 +1,28 @@
+@import "../../styles/variables.less";
+
+.description-with-bg-img__container {
+    .flexRowCenter;
+    background-position-y: 20%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 280px;
+}
+
+.description-with-bg-img__text-container {
+    .flexColumnCenter;
+    width: 50%;
+    padding: @marginStackL;
+
+}
+
+.description-with-bg-img__text {
+    max-width: 380pt;
+    color: @gray20;
+    margin-bottom: @marginStackL;
+}
+
+@media (max-width: 780px) {
+    .description-with-bg-img__text-container {
+        width: 100%;    
+    }
+}
