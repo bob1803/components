@@ -22,7 +22,6 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <div>HOME</div>
         <Services></Services>
         <DescriptionImg config={descriptionImgConfig}></DescriptionImg>
         <div>HOME</div>
