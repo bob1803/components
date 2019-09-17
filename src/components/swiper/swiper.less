@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    white-space: nowrap;
+    //white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
   
@@ -46,7 +46,7 @@
     top: 0;
     bottom: 0;
     height: 100%;
-    box-shadow: 1px 0px 14px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 0px 14px 2px fadeout(@gray100, 50%);
     z-index: 10;
   }
   
@@ -56,47 +56,47 @@
     top: 0;
     bottom: 0;
     height: 100%;
-    box-shadow: -1px 0px 14px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: -1px 0px 14px 2px fadeout(@gray100, 50%);
     z-index: 10;
-  }
-  
-  .swiper_inactiveArrow {
-    height: 29px;
-    width: 29px;
-    border-radius: 50%;
-    background-color: rgba(99, 100, 100, 0.05);
-  }
-  
-  .swiper_inactiveArrow > .arrow_ico {
-    fill: rgba(99, 100, 100, 0.3);
   }
   
   .swiper_arrow {
     height: 29px;
     width: 29px;
     border-radius: 50%;
-    background-color: rgba(99, 100, 100, 0.1);
+    background-color: fadeout(@gray90, 90%);
   }
   
-  .swiper_arrow > .arrow_ico {
-    fill: rgba(99, 100, 100, 0.6);
+  .swiper_arrow > .swiper_arrow_ico {
+    fill: fadeout(@gray90, 30%);
   }
   
-  .swiper_arrow:hover > .arrow_ico {
-    fill: rgba(99, 100, 100, 1);
+  .swiper_arrow:hover > .swiper_arrow_ico {
+    fill: fadeout(@gray90, 20%);
+  }
+
+  .swiper_inactiveArrow {
+    height: 29px;
+    width: 29px;
+    border-radius: 50%;
+    background-color: fadeout(@gray90, 90%);
+  }
+  
+  .swiper_inactiveArrow .swiper_arrow_ico {
+    fill: fadeout(@gray90, 80%);
   }
   
   .swiper_arrow:hover {
-    background-color: rgba(99, 100, 100, 0.2);
+    background-color: fadeout(@gray90, 85%);
     cursor: pointer;
   }
   
   .swiper_arrow_prev {
-    margin-right: 8px;
+    margin: 0 8px;
   }
   
   .swiper_arrow_next {
-    margin-left: 8px;
+    margin: 0 8px;
   }
   
   .swiper_wrap_dots {
@@ -109,11 +109,11 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgba(99, 100, 100, 0.5);
+    background-color: @gray60;
     margin: 16px 8px;
   }
   .swiper_dot:hover {
-    background-color: rgba(99, 100, 100, 0.7);
+    background-color: darken(@gray60, 10%);
     cursor: pointer;
   }
   
@@ -121,7 +121,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgba(99, 100, 100, 1);
+    background-color: darken(@gray60, 20%);
     margin: 16px 8px;
   }
   

@@ -1,6 +1,5 @@
 import React from "react";
 import "./about.less";
-import img from "../../images/imgUpload/img_test_1.jpg";
 import ListOrdered from "../list/listOrdered";
 import ListUnordered from "../list/listUnordered";
 import ListUnmarked from "../list/listUnmarked";

@@ -526,7 +526,7 @@ export default class Swiper extends React.Component {
   _clickArrow = event => {
     let target = event.target;
     while (target !== this._elem) {
-      if (target.classList.contains(swiperStyles.arrow)) {
+      if (target.classList.contains("swiper_arrow")) {
         let direction = target.getAttribute("direction");
         if (direction === "next" && this._state.next !== 0) this._scrollNext(1);
         if (direction === "prev" && this._state.prev !== 0) this._scrollPrev(1);
@@ -636,8 +636,8 @@ export default class Swiper extends React.Component {
             direction="prev"
             className={`${"swiper_arrow_prev"} ${
               this._state.prev === 0
-                ? swiperStyles.inactiveArrow
-                : swiperStyles.arrow
+                ? "swiper_inactiveArrow"
+                : "swiper_arrow"
             }`}
           >
             <svg
@@ -663,7 +663,7 @@ export default class Swiper extends React.Component {
               {this.props.children.map((item, index) => (
                 <div
                   className="swiper_item"
-                  swiperStyles={{
+                  style={{
                     minWidth: `${this._state.itemWidth}px`
                   }}
                   key={index}
