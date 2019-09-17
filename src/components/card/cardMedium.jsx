@@ -16,6 +16,9 @@ export default class CardMedium extends React.Component {
               options={{
                 src: this.props.config.img
               }}
+              styles={{
+                borderRadius: "8px 8px 0 0"
+              }}
             ></ImgRectangle>
           </div>
           <div className="card-medium__text-container">
