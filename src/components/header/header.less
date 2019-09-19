@@ -10,6 +10,10 @@
   background-color: @menuSlateGray;
   padding: 0 24px;
   box-sizing: border-box;
+  @media (max-width: @laptopMedia) {
+    flex-wrap: wrap;
+  }
+
 }
 
 .header__wrap-left {
@@ -25,10 +29,16 @@
   align-items: center;
   justify-content: space-between;
   flex-grow: 1;
+
   @media (max-width: @laptopMedia) {
     flex-direction: row-reverse;
     justify-content: flex-start;
   }
+
+  @media (max-width: 480px) {
+    justify-content: space-between;
+  }
+
 }
 
 
