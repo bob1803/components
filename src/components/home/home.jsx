@@ -8,6 +8,7 @@ import ButtonSecondary from "../button/buttonSecondary";
 import ParagrafMedium from "../paragraf/paragrafMedium";
 import DescriptionImg from "../descriptionImg/descriptionImg";
 import DescriptionWithBgImage from "../descriptionWithBgImage/descriptionWithBgImage";
+import TwoColumnText from "../twoColumnText/twoColumnText";
 import imgDescriptionImg from "../../images/imgUpload/img_test_2.jpg";
 import imgDescriptionWithBgImg from "../../images/imgUpload/img_test_1.jpg";
 
@@ -31,6 +32,21 @@ const descriptionWithBgImgConfig = {
   img: imgDescriptionWithBgImg
   }
 
+  const twoColumnTextConfig = {
+    listOrdered: [
+      "On the other hand, we denounce with righteous indignation",
+      "We denounce with righteous",
+      "Other hand, we denounce with righteous indignation",
+      "Dislike men who are so beguiled and demoralized",
+      "Beguiled and demoralized"
+    ],
+    listUnmarked: [
+      "Other hand, we denounce with righteous indignation",
+      "On the other hand, we denounce with righteous indignation",
+      "Beguiled and demoralized"
+    ]
+  }
+
 export default class Home extends React.Component {
   render() {
     return (
@@ -38,6 +54,7 @@ export default class Home extends React.Component {
         <Services></Services>
         <DescriptionImg config={descriptionImgConfig}></DescriptionImg>
         <DescriptionWithBgImage config={descriptionWithBgImgConfig}></DescriptionWithBgImage>
+        <TwoColumnText config={twoColumnTextConfig}></TwoColumnText>
         <div>HOME</div>
         <LinkSmall link="/about">I'm Link! Go to About!</LinkSmall>
         <ButtonPrimary link="/about">Go to About</ButtonPrimary>

@@ -4,12 +4,7 @@ import "./listUnmarked.less";
 export default class ListUnmarked extends React.Component {
   constructor(props) {
     super(props);
-    this._itemsList = [];
-  }
-  componentWillReceiveProps() {
-    if (this.props.children) {
-      this._itemsList = this.props.children;
-    }
+    this._itemsList = this.props.children || [];
   }
   render() {
     return (

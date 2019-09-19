@@ -5,7 +5,6 @@ import "./descriptionWithBgImage.less";
 
 export default class DescriptionWithBgImage extends React.Component {
   render() {
-    console.log(this.props.config.img);
     return (
       <div className="description-with-bg-img__container"
       style={{

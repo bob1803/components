@@ -4,12 +4,7 @@ import "./listOrdered.less";
 export default class ListOrdered extends React.Component {
   constructor(props) {
     super(props);
-    this._itemsList = [];
-  }
-  componentWillReceiveProps() {
-    if (this.props.children) {
-      this._itemsList = this.props.children;
-    }
+    this._itemsList = this._itemsList = this.props.children || [];
   }
   render() {
     return (
