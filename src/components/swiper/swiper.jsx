@@ -614,12 +614,19 @@ export default class Swiper extends React.Component {
     }
   };
 
+  componentWillUnmount() {
+      window.removeEventListener("onload", this._initialSwiper);
+      window.removeEventListener("resize", this._resize);
+
+  }
+
   componentDidMount() {
     this._initialSwiper();
     this._viewPort.addEventListener("touchstart", this._onTouchStart, false);
     this._viewPort.addEventListener("touchmove", this._onTouchMove, false);
     this._viewPort.addEventListener("touchend", this._onTouchEnd, false);
     window.addEventListener("resize", this._resize, false);
+    window.addEventListener("onload", this._initialSwiper, false);
   }
 
   render() {
