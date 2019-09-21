@@ -8,17 +8,25 @@ import { configMenu } from "../../config";
 export default class Header extends React.Component {
   render() {
     return (
-      <div className="header__container">
-        <div className="header__wrap-left">
-          <LogoMedium></LogoMedium>
+      <header className="header__container">
+        <div className="header__wrap-content">
+          <div className="header__wrap-left">
+            <div className="header__logo-container">
+              <LogoMedium></LogoMedium>
+            </div>
+          </div>
+          <div className="header__wrap-right">
+            <div className="header__menu-container">
+              <Menu minWidth={900} config={configMenu}></Menu>
+            </div>
+            <div className="header__link-container">
+              <LinkLarge className="header__link" link="/about">
+                Link about
+              </LinkLarge>
+            </div>
+          </div>
         </div>
-        <div className="header__wrap-right">
-          <Menu minWidth={900} config={configMenu}></Menu>
-          <LinkLarge className="header__link" link="/about">
-            Link about
-          </LinkLarge>
-        </div>
-      </div>
+      </header>
     );
   }
 }

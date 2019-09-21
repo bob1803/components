@@ -6,18 +6,22 @@ import "./descriptionWithBgImage.less";
 export default class DescriptionWithBgImage extends React.Component {
   render() {
     return (
-      <div className="description-with-bg-img__container"
-      style={{
-        backgroundImage: `url(${this.props.config.img})`
-      }}>
-        <div className="description-with-bg-img__text-container">
-          <div className="description-with-bg-img__text">
-            <ParagrafMedium>{this.props.config.text}</ParagrafMedium>
-          </div>
-          <div className="description-with-bg-img__button">
-            <ButtonPrimary link={this.props.config.button.link}>
-              {this.props.config.button.text}
-            </ButtonPrimary>
+      <div
+        className="description-with-bg-img__container"
+        style={{
+          backgroundImage: `url(${this.props.config.img})`
+        }}
+      >
+        <div className="description-with-bg-img__wrap-content">
+          <div className="description-with-bg-img__text-container">
+            <div className="description-with-bg-img__text">
+              <ParagrafMedium>{this.props.config.text}</ParagrafMedium>
+            </div>
+            <div className="description-with-bg-img__button">
+              <ButtonPrimary link={this.props.config.button.link}>
+                {this.props.config.button.text}
+              </ButtonPrimary>
+            </div>
           </div>
         </div>
       </div>

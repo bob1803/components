@@ -1,15 +1,18 @@
 @import "../../styles/variables.less";
-
 .header__container {
+  width: 100%;
+  background-color: @menuSlateGray;
+}
+.header__wrap-content {
+  .container;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   align-items: center;
   position: relative;
   width: 100%;
-  background-color: @menuSlateGray;
-  padding: 0 24px;
-  box-sizing: border-box;
+  //padding: 0 24px;
+  //box-sizing: border-box;
   @media (max-width: @laptopMedia) {
     flex-wrap: wrap;
   }
@@ -21,6 +24,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+}
+
+.header__logo-container {
+  margin-right: @marginInlineM;
 }
 
 .header__wrap-right {

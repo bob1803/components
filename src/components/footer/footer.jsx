@@ -31,21 +31,24 @@ export default class Footer extends React.Component {
     return (
       <footer>
         <div className="footer__container">
-          <div className="footer__logo-container">
-            <LogoSmall></LogoSmall>
-          </div>
-          <div className="footer__links-container">
-            {linksConfig.map(item => (
-              <div key={item.title} className="footer__links-block">
+          <div className="footer__wrap-content">
+            <div className="footer__logo-container">
+              <LogoSmall></LogoSmall>
+            </div>
+            <div className="footer__links-container">
+              {linksConfig.map(item => (
+                <div key={item.title} className="footer__links-block">
                   <p className="footer__links-block_title">{item.title}</p>
-                {item.links.map(itemLinks => (
-                  <div key={itemLinks.name} className="footer__link">
-                      <LinkSmall link={itemLinks.link}
-                      color="secondary">{itemLinks.name}</LinkSmall>
-                  </div>
-                ))}
-              </div>
-            ))}
+                  {item.links.map(itemLinks => (
+                    <div key={itemLinks.name} className="footer__link">
+                      <LinkSmall link={itemLinks.link} color="secondary">
+                        {itemLinks.name}
+                      </LinkSmall>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </footer>

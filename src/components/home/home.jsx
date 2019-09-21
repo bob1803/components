@@ -55,12 +55,6 @@ export default class Home extends React.Component {
         <DescriptionImg config={descriptionImgConfig}></DescriptionImg>
         <DescriptionWithBgImage config={descriptionWithBgImgConfig}></DescriptionWithBgImage>
         <TwoColumnText config={twoColumnTextConfig}></TwoColumnText>
-        <div>HOME</div>
-        <LinkSmall link="/about">I'm Link! Go to About!</LinkSmall>
-        <ButtonPrimary link="/about">Go to About</ButtonPrimary>
-        <LinkLarge link="/blog">I'M Link too! Go to Blog</LinkLarge>
-        <ButtonSecondary link="/contact">Go to Contact</ButtonSecondary>
-        <ParagrafMedium></ParagrafMedium>
       </div>
     );
   }

@@ -1,10 +1,17 @@
 @import "../../styles/variables.less";
 
 .services__container {
+    background-color: fadeout(@tealBase, 80%);
+}
+
+.services__wrap-content {
     .flexColumnCenter;
     width: 100%;
-    background-color: fadeout(@tealBase, 80%);
     padding-top: @marginStackM;
+    box-sizing: border-box;
+    @media (min-width: @tabletMedia) {
+        .container;
+    }
 }
 
 .services__title {

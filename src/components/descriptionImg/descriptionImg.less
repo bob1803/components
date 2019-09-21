@@ -1,8 +1,17 @@
 @import "../../styles/variables.less";
 
+
 .description-img__container {
-  .flexRowCenter;
   background-color: bisque;
+}
+
+.description-img__wrap-content {
+    .container;
+    .flexRowCenter;
+    @media (max-width: @tabletMedia) {
+        .flexColumnCenter;
+        flex-direction: column-reverse;
+    }
 }
 
 .description-img__text-container {

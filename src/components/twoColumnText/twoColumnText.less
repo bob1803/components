@@ -1,37 +1,36 @@
 @import "../../styles/variables.less";
 
 .two-column-text__container {
+  background-color: @redSmooth;
+}
+
+.two-column-text__wrap-content {
+  .container;
   .flexRowCenter;
   align-items: flex-start;
   padding-top: @marginStackM;
-  background-color: @redSmooth;
 }
 
 .two-column-text__left-container {
   width: 50%;
   box-sizing: border-box;
   margin-bottom: @marginStackM;
-  padding-right: @marginInlineM;
-  padding-left: @marginInlineM;
 }
 
 .two-column-text__right-container {
   width: 50%;
   box-sizing: border-box;
   margin-bottom: @marginStackM;
-  padding-right: @marginInlineM;
 }
 
 @media (max-width: 780px) {
-    .two-column-text__container {
-        .flexColumnCenter;
-    }
+  .two-column-text__wrap-content {
+    .flexColumnCenter;
+  }
 
-    .two-column-text__left-container, 
-    .two-column-text__right-container {
-        width: 100%;
-        margin: 0 @marginInlineM;
-    }
-} 
-
-
+  .two-column-text__left-container,
+  .two-column-text__right-container {
+    width: 100%;
+    margin: 0 @marginInlineM;
+  }
+}
