@@ -1,5 +1,6 @@
 const path = require("path");
 //const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const devEnv = 'development'
 const NODE_ENV = process.env.NODE_ENV || devEnv
@@ -8,7 +9,8 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    chunkFilename: '[name].bundle.js',
   },
   devtool: NODE_ENV === devEnv ? 'inline-source-map' : 'hidden-source-map',
   module: {
@@ -57,7 +59,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       favicon: "./src/images/favicon.ico",
-    })
+    }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     contentBase: "./dist",

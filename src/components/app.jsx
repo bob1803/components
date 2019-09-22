@@ -1,23 +1,23 @@
-import * as React from "react";
+import  React, { Suspense, lazy } from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { HashRouter, Route, Router} from 'react-router-dom';
-//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Menu from "./menu/menu";
 import Header from "./header/header";
 import LogoMedium from "./logo/logoMedium";
-import Home from "./home/home";
-import About from "./about/about";
-import Contact from "./contact/contact";
-import Blog from "./blog/blog";
 import Footer from "./footer/footer";
 import "../styles/reset.less";
 import gql from "graphql-tag";
 import { observable, useStrict, action } from "mobx";
 import { observer } from "mobx-react";
 import "./app.less";
-useStrict(true);
 
+const Home = lazy(() => import("./home/home"));
+const About = lazy(() => import("./about/about"));
+const Contact = lazy(() => import("./contact/contact"));
+const Blog = lazy(() => import("./blog/blog"));
+
+useStrict(true);
 const client = new ApolloClient({
   uri: "http://localhost:3005/graphql"
 });
@@ -80,6 +80,7 @@ export class App extends React.Component {
       return (
         <ApolloProvider client={client}>
           <HashRouter>
+          <Suspense fallback={<div>Загрузка...</div>}>
             <Header>
               <LogoMedium />
               <Menu
@@ -92,6 +93,7 @@ export class App extends React.Component {
             <Route path="/contact" component={Contact} />
             <Route path="/blog" component={Blog} />
             <Footer></Footer>
+            </Suspense>
           </HashRouter>
         </ApolloProvider>
       );
