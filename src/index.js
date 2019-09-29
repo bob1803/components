@@ -10,5 +10,3 @@ const appNode = document.getElementById('app');
 ReactDom.render(
     <App/>
 , appNode);
-
-//module.hot.accept();

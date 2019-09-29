@@ -4,8 +4,8 @@
   "description": "my custom components for the lending pages etc.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --open --config ./webpack.config.dev.js --hot",
+    "build": "webpack --config ./webpack.config.prod.js",
     "serve": "nodemon server/app.js"
   },
   "repository": {
@@ -39,27 +39,17 @@
     "mobx-react": "^4.3.5",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-hot-loader": "^4.12.11",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "@apollo/react-hooks": "^3.0.1",
-    "apollo-boost": "^0.4.4",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
-    "graphql": "^14.4.2",
-    "graphql-tag": "^2.10.1",
-    "mongoose": "^5.6.9",
-    "nodemon": "^1.19.1",
-    "radium": "^0.25.2",
-    "react-apollo": "^3.0.1",
     "react-resize-detector": "^4.2.0",
     "react-router-dom": "^5.0.1",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "webpack-merge": "^4.2.2"
   }
 }
