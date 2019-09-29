@@ -1,6 +1,6 @@
 import  React, { Suspense, lazy } from "react";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
+//import ApolloClient from "apollo-boost";
+//import { ApolloProvider } from "react-apollo";
 import { HashRouter, Route, Router} from 'react-router-dom';
 import Menu from "./menu/menu";
 import Header from "./header/header";
@@ -18,10 +18,11 @@ const Contact = lazy(() => import("./contact/contact"));
 const Blog = lazy(() => import("./blog/blog"));
 
 useStrict(true);
+/*
 const client = new ApolloClient({
   uri: "http://localhost:3005/graphql"
 });
-
+*/
 class AppState {
   constructor() {
     this.loading = true;
@@ -55,6 +56,7 @@ export class App extends React.Component {
     super(props);
     this._state = new AppState();
   }
+  /*
   componentDidMount() {
     client
       .query({
@@ -72,20 +74,15 @@ export class App extends React.Component {
         this._state.setDownloaded();
       });
   }
-
+*/
   render() {
-    if (this._state.loading) {
-      return <p>Loading</p>;
-    } else {
       return (
-        <ApolloProvider client={client}>
           <HashRouter>
           <Suspense fallback={<div>Загрузка...</div>}>
             <Header>
               <LogoMedium />
               <Menu
                 minWidth={900}
-                config={this._state.queryConfig.menuConfig}
               />
             </Header>
             <Route exact path="/" component={Home} />
@@ -95,8 +92,7 @@ export class App extends React.Component {
             <Footer></Footer>
             </Suspense>
           </HashRouter>
-        </ApolloProvider>
       );
     }
   }
-}
+

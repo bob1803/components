@@ -1,9 +1,9 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-//import { getViewportWidth } from "../../helpers";
 import "./menu.less";
-import { observable, useStrict, action, toJS } from "mobx";
+import { observable, useStrict, action } from "mobx";
 import { observer } from "mobx-react";
+import { menuConfig } from "../../../data/config";
 
 useStrict(true);
 
@@ -24,7 +24,6 @@ class MenuState {
     this.open = !this.open;
   }
 }
-
 
 @observer
 export default class Menu extends React.Component {
@@ -55,10 +54,9 @@ export default class Menu extends React.Component {
   render() {
     return (
       <div className="menu__container">
-        
         <div className="full-menu__container">
           <div className="full-menu__wrap-item">
-            {this.props.config.map((item, index) => (
+            {menuConfig.map((item, index) => (
               <NavLink
                 key={index}
                 exact
@@ -74,42 +72,42 @@ export default class Menu extends React.Component {
         </div>
 
         <div className="min-menu__container">
-        <div
-          className="min-menu__hamburger-container"
-          onClick={this._handlerHamburgerClick}
-        >
-          <span
-            className={`min-menu__hamburger ${
-              this._state.open ? "min-menu__dropdown-open" : ""
-            }`}
-          />
-        </div>
+          <div
+            className="min-menu__hamburger-container"
+            onClick={this._handlerHamburgerClick}
+          >
+            <span
+              className={`min-menu__hamburger ${
+                this._state.open ? "min-menu__dropdown-open" : ""
+              }`}
+            />
+          </div>
 
-        <div
-          className={`min-menu__dropdown ${
-            !this._state.open
-              ? "min-menu__dropdown-clossed"
-              : "min-menu__dropdown-opened"
-          }`}
-        >
-          {this.props.config.map((item, index) => (
-            <NavLink
-              exact
-              to={item.link}
-              activeClassName="min-menu__item-selected"
-              key={index}
-            >
-              <div
-                className={`min-menu__dropdown-item ${
-                  index === 0 ? "min-menu__dropdown-item-first" : ""
-                }`}
+          <div
+            className={`min-menu__dropdown ${
+              !this._state.open
+                ? "min-menu__dropdown-clossed"
+                : "min-menu__dropdown-opened"
+            }`}
+          >
+            {menuConfig.map((item, index) => (
+              <NavLink
+                exact
+                to={item.link}
+                activeClassName="min-menu__item-selected"
+                key={index}
               >
-                {item.title}
-              </div>
-            </NavLink>
-          ))}
+                <div
+                  className={`min-menu__dropdown-item ${
+                    index === 0 ? "min-menu__dropdown-item-first" : ""
+                  }`}
+                >
+                  {item.title}
+                </div>
+              </NavLink>
+            ))}
+          </div>
         </div>
-      </div>
       </div>
     );
   }
