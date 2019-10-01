@@ -1,0 +1,31 @@
+@import "../../styles/variables.less";
+
+@keyframes running-line {
+  from {
+    width: 0;
+  }
+  to {
+    width: 200%;
+  }
+}
+
+.loading__wrap {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.meter {
+  height: 2px; 
+  position: relative;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  animation: running-line 0.8s infinite;
+  animation-timing-function: ease-out;
+  background: @gray90;
+}
