@@ -117,11 +117,10 @@ class SwiperState {
     return this.contentWidth - this.viewportWidth;
   }
 
-   // the size scrolling to the end
+  // the size scrolling to the end
   @computed
   get toEnd() {
     return this.contentWidth - this.viewportWidth - this.prev;
-
   }
 }
 
@@ -155,12 +154,12 @@ export default class Swiper extends React.Component {
     let countDotsNext = 0;
     let countDotsPrev = 0;
 
-    let centeredNext = this.__centeringItem(true, 0);
+    let centeredNext = this.__centeringItem(true, 0, "logged _getConfigDots");
     if (Math.abs(centeredNext) > this._state.itemWidth) {
       centeredNext -= this._state.itemWidth;
     }
 
-    let centeredPrev = Math.abs(this.__centeringItem(false, 0));
+    let centeredPrev = Math.abs(this.__centeringItem(false, 0, "logged _getConfigDots"));
     if (centeredPrev > this._state.itemWidth) {
       centeredPrev -= this._state.itemWidth;
     }
@@ -233,8 +232,10 @@ export default class Swiper extends React.Component {
       this.props.itemWidth || this._state.contentWidth / countItems;
 
     itemWidth =
-      this._state.viewportWidth < itemWidth ? this._state.viewportWidth : itemWidth;
-      return itemWidth;
+      this._state.viewportWidth < itemWidth
+        ? this._state.viewportWidth
+        : itemWidth;
+    return itemWidth;
   };
 
   _onTouchStart = event => {
@@ -280,15 +281,12 @@ export default class Swiper extends React.Component {
 
     //disable scroll outside content
     if (this._state.prev + swipeSizeX >= this._state.maxScroll) {
-
       this._state.setPrev(this._state.maxScroll);
       this._state.setNext(0);
     } else if (this._state.prev + swipeSizeX <= 0) {
-
       this._state.setPrev(0);
       this._state.setNext(this._state.maxScroll);
     } else {
-
       this._state.setPrev(this._state.prev + swipeSizeX);
       this._state.setNext(this._state.next - swipeSizeX);
     }
@@ -309,9 +307,10 @@ export default class Swiper extends React.Component {
     this._state.setDelta({});
   };
 
-  __centeringItem = (direction, swipeSize) => {
+  __centeringItem = (direction, swipeSize, logged) => {
     // direction === true - next, direction === false - prev
     // total number of cards
+
     let countItems = this.props.children.length;
 
     // find the current card you want to center
@@ -326,10 +325,10 @@ export default class Swiper extends React.Component {
       if (
         // when one card in viewport, we go to the next
         //swipeSize < this._state.itemWidth / 2 &&
-        this._state.viewportWidth / this._state.itemWidth === 1
+        this._state.viewportWidth / this._state.itemWidth ===
+        1
       ) {
         ++currentCenterItem;
-
       } else if (
         // the first step we center half the card, then the whole card
         this._state.startPrev !== 0 &&
@@ -404,6 +403,8 @@ export default class Swiper extends React.Component {
         this._state.itemWidth / 2 -
         this._state.next;
     }
+    let returned = (currentPrevSize - currentNextSize) / 2 ;
+    console.log(returned , "returned value __centeringItem");
 
     return (currentPrevSize - currentNextSize) / 2;
   };
@@ -427,7 +428,7 @@ export default class Swiper extends React.Component {
       return;
     }
 
-    let valueCentering = this.__centeringItem(false, swipeSizeX);
+    let valueCentering = this.__centeringItem(false, swipeSizeX, "logged _swipePrev");
 
     let scrollSize;
 
@@ -449,7 +450,7 @@ export default class Swiper extends React.Component {
   };
 
   _swipeNext = swipeSize => {
-    
+    //console.log(swipeSize, "from _swipeNext")
     let swipeSizeX = Math.abs(swipeSize);
 
     // if move is less than the determined minimum value for swipe, - reset the swipe
@@ -460,29 +461,32 @@ export default class Swiper extends React.Component {
         x: 0,
         y: 0
       });
+      //console.log(swipeSize, "меньше установленного минимума для свайпа")
       return;
     }
-    let valueCentering = this.__centeringItem(true, swipeSizeX);
-
+    let valueCentering = this.__centeringItem(true, swipeSizeX, "logged _swipeNext");
+    //console.log(valueCentering, "valueCentering")
     let scrollSize;
 
     // if the swipe is smaller then remainder,
     if (swipeSizeX > this._state.startNext) {
-
       scrollSize = this._state.toEnd;
     } else if (swipeSizeX + valueCentering <= this._state.startNext) {
-      
       scrollSize = valueCentering;
     } else {
-
       scrollSize = this._state.toEnd;
 
       // here you can handle the scroll end animation
     }
+    //console.log(scrollSize, "scrollSize");
+    //console.log(this._state.prev, "this._state.prev");
+    // console.log(this._state.next, "this._state.next")
 
     this._state.setPrev(this._state.prev + scrollSize);
     this._state.setNext(this._state.next - scrollSize);
     this._state.setDots(this._getConfigDots());
+    //console.log(this._state.prev, "this._state.prev");
+    //console.log(this._state.next, "this._state.next");
   };
 
   _getClassShadowSide = () => {
@@ -498,21 +502,19 @@ export default class Swiper extends React.Component {
   };
 
   _getClassShadowLeft = () => {
-    if (+this._state.prev !== 0 ) {
+    if (+this._state.prev !== 0) {
       return "swiper_shadow_left";
     }
-  }
+  };
 
   _getClassShadowRight = () => {
-    if (this._state.next !== 0 ) {
+    if (this._state.next !== 0) {
       return "swiper_shadow_right";
     }
-  }
+  };
 
   _getClassAnimation = () => {
-    return this._state.animation
-      ? "swiper_animation"
-      : "swiper_animation_none";
+    return this._state.animation ? "swiper_animation" : "swiper_animation_none";
   };
 
   _clickDot = event => {
@@ -542,10 +544,11 @@ export default class Swiper extends React.Component {
     for (let i = 0; i < countStep; i++) {
       // if we scroll from the very beginning
       if (i === 0 && this._state.prev === 0) {
-        scrollSize = this.__centeringItem(true, 0, "logged scrollNext");
+        scrollSize = this.__centeringItem(true, 0, "logged scrollNext", "logged  _scrollNext");
 
-      // if only one iteration
-        scrollSize = (scrollSize > this._state.next) ? this._state.next : scrollSize;
+        // if only one iteration
+        scrollSize =
+          scrollSize > this._state.next ? this._state.next : scrollSize;
         continue;
       }
       scrollSize += this._state.itemWidth;
@@ -566,14 +569,13 @@ export default class Swiper extends React.Component {
   _scrollPrev = countStep => {
     let scrollSize = 0;
     for (let i = 0; i < countStep; i++) {
-
       // if we scroll out the very end
       if (i === 0 && this._state.next === 0) {
-        scrollSize = Math.abs(this.__centeringItem(false, 0));
+        scrollSize = Math.abs(this.__centeringItem(false, 0, "logged _scrollPrev"));
 
-        
-      // if only one iteration
-      scrollSize = (scrollSize > this._state.prev) ? this._state.prev : scrollSize;
+        // if only one iteration
+        scrollSize =
+          scrollSize > this._state.prev ? this._state.prev : scrollSize;
         continue;
       }
       scrollSize += this._state.itemWidth;
@@ -605,6 +607,7 @@ export default class Swiper extends React.Component {
     this._state.setContentWidth(this._getContentWidth()); // to reduce DOM operations
     this._state.setNext(this._getAvailableNext());
     this._state.setDots(this._getConfigDots());
+    console.log(toJS(this._state), "from _initialSwiper")
   };
 
   _resize = () => {
@@ -615,9 +618,8 @@ export default class Swiper extends React.Component {
   };
 
   componentWillUnmount() {
-      window.removeEventListener("onload", this._initialSwiper);
-      window.removeEventListener("resize", this._resize);
-
+    window.removeEventListener("onload", this._initialSwiper);
+    window.removeEventListener("resize", this._resize);
   }
 
   componentDidMount() {
@@ -642,9 +644,7 @@ export default class Swiper extends React.Component {
             onClick={this._clickArrow}
             direction="prev"
             className={`${"swiper_arrow_prev"} ${
-              this._state.prev === 0
-                ? "swiper_inactiveArrow"
-                : "swiper_arrow"
+              this._state.prev === 0 ? "swiper_inactiveArrow" : "swiper_arrow"
             }`}
           >
             <svg
@@ -659,7 +659,7 @@ export default class Swiper extends React.Component {
             ref={node => (this._viewPort = node)}
             className="swiper_viewport"
           >
-           <div className={this._getClassShadowLeft()}></div>
+            <div className={this._getClassShadowLeft()}></div>
             <div
               ref={node => {
                 this._content = node;
@@ -680,15 +680,12 @@ export default class Swiper extends React.Component {
               ))}
             </div>
             <div className={this._getClassShadowRight()}></div>
-
           </div>
           <div
             onClick={this._clickArrow}
             direction="next"
             className={`${"swiper_arrow_next"} ${
-              this._state.next === 0
-                ? "swiper_inactiveArrow"
-                : "swiper_arrow"
+              this._state.next === 0 ? "swiper_inactiveArrow" : "swiper_arrow"
             }`}
           >
             <svg
@@ -707,9 +704,7 @@ export default class Swiper extends React.Component {
               onClick={this._clickDot}
               val={item.value}
               direction={item.direction}
-              className={
-                item.active ? "swiper_dotActive" : "swiper_dot"
-              }
+              className={item.active ? "swiper_dotActive" : "swiper_dot"}
             />
           ))}
         </div>
