@@ -16,6 +16,10 @@ class SwiperXState {
     this.viewportWidth = null;
     this.contentWidth = null;
     this.availableShift = null;
+    this.waveLimiter = {
+      leftWidth: 0,
+      rightWidth: 0
+    };
     this.start = {};
     this.delta = {
       x: 0,
@@ -94,6 +98,14 @@ class SwiperXState {
   setStickyItem(newItem) {
     this.stickyItem = newItem;
   }
+
+  @observable
+  waveLimiter;
+
+  @action
+  setWaveLimiter(newWaveLimiterObj) {
+    this.waveLimiter = newWaveLimiterObj;
+  }
 }
 
 @observer
@@ -165,10 +177,28 @@ export default class SwiperX extends React.Component {
       prev__state: this._state.prev
     });
     */
-
     let newPrew = this._state.prev - swipeSizeX;
     // newPrew = swipeSizeX > 0 ? newPrew : -newPrew;
+    
+    if (newPrew > 0) { // for wave limiter left
+      let deltaWidthWaveLimiter = null;
+      if (this._state.prev < 0 && swipeSizeX < 0) {//волна растет 
+        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth + Math.abs(this._state.prev + swipeSizeX) / 3;
+      } else if (this._state.prev >= 0 && swipeSizeX < 0){//волна растет
+        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth + Math.abs(swipeSizeX) / 3;
+      } else if (this._state.prev < 0 && swipeSizeX > 0) {
+        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth - Math.abs(swipeSizeX) / 3;
 
+      }
+
+            log({
+        call: "_onTouchMove",
+        deltaPrev: deltaWidthWaveLimiter,
+        swipeSizeX: swipeSizeX
+      })
+      this._state.setWaveLimiter({leftWidth: deltaWidthWaveLimiter})
+
+    }
     this._state.setPrev(newPrew);
   };
 
@@ -186,6 +216,10 @@ export default class SwiperX extends React.Component {
     // reset delta the swipe
     this._state.setDelta({});
     //console.log("_onTouchEnd");
+    this._state.setWaveLimiter({
+      leftWidth: 0,
+      rightWidth: 0
+    })
   };
 
   _getStickyItemForNext = swipeSize => {
@@ -208,14 +242,14 @@ export default class SwiperX extends React.Component {
           this._state.stickyItem + Math.ceil(swipeSize / this._state.itemWidth);
         break;
     }
-
+/*
     log({
       call: " _getStickyItemForNext",
       swipeSize: swipeSize,
       availableNext: availableNext,
       newStickyItem: newStickyItem
     });
-
+*/
     return newStickyItem;
   };
 
@@ -268,7 +302,7 @@ export default class SwiperX extends React.Component {
           this._state.stickyItem - Math.ceil(swipeSize / this._state.itemWidth);
         break;
     }
-
+/*
     log({
       call: " _getStickyItemForPrev",
       case: caseItem,
@@ -276,6 +310,7 @@ export default class SwiperX extends React.Component {
       prev: this._state.prev,
       newStickyItem: newStickyItem
     });
+    */
     return newStickyItem;
   };
 
@@ -343,8 +378,10 @@ export default class SwiperX extends React.Component {
         className="swiper-x__container"
       >
         <div className="swiper-x__wave-limiter-left"
-        style={{borderRadius: "0 100% 100% 0 / 0 50% 50% 0",
-        width: `${this._state.waveLimiter.leftWidth}`}}></div>
+          style={{
+            borderRadius: "0 100% 100% 0 / 0 50% 50% 0",
+            width: `${this._state.waveLimiter.leftWidth}px`
+          }}></div>
         <div className="swiper-x__viewport">
           <div
             className="swiper-x__content"
@@ -364,8 +401,10 @@ export default class SwiperX extends React.Component {
           </div>
         </div>
         <div className="swiper-x__wave-limiter-right"
-          style={{borderRadius: "100% 0 0 100% / 50% 0 0 50%",
-          width: `${this._state.waveLimiter.rightWidth}`}}></div>
+          style={{
+            borderRadius: "100% 0 0 100% / 50% 0 0 50%",
+            width: `${this._state.waveLimiter.rightWidth}px`
+          }}></div>
       </div>
     );
   }
