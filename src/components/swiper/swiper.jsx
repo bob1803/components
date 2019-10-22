@@ -403,8 +403,6 @@ export default class Swiper extends React.Component {
         this._state.itemWidth / 2 -
         this._state.next;
     }
-    let returned = (currentPrevSize - currentNextSize) / 2 ;
-    console.log(returned , "returned value __centeringItem");
 
     return (currentPrevSize - currentNextSize) / 2;
   };
@@ -607,7 +605,6 @@ export default class Swiper extends React.Component {
     this._state.setContentWidth(this._getContentWidth()); // to reduce DOM operations
     this._state.setNext(this._getAvailableNext());
     this._state.setDots(this._getConfigDots());
-    console.log(toJS(this._state), "from _initialSwiper")
   };
 
   _resize = () => {

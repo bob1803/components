@@ -159,6 +159,47 @@ export default class SwiperX extends React.Component {
     return value / 4;
   };
 
+  _withWaveLimiter = (newPrew, swipeSizeX) => {
+    if (newPrew > 0) { // for wave limiter left
+
+      let deltaWidthWaveLimiter = null;
+
+      if (this._state.prev <= 0 && swipeSizeX < 0) {//wave is growing, initialization
+        deltaWidthWaveLimiter = this._throttled(Math.abs(this._state.prev + swipeSizeX));
+      } else if (this._state.prev > 0 && swipeSizeX <= 0) {//wave is growing, continued
+        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth + this._throttled(Math.abs(swipeSizeX));
+      } else if (swipeSizeX > 0) {//wave decreases
+        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth - this._throttled(Math.abs(swipeSizeX));
+      }
+
+      this._state.setWaveLimiter({ leftWidth: deltaWidthWaveLimiter })
+      newPrew = this._state.prev - this._throttled(swipeSizeX);
+    }
+
+    if (Math.abs(newPrew) > this._state.availableShift) {//for wave limiter right
+
+      let deltaWidthWaveLimiter = null;
+
+      if (Math.abs(this._state.prev) < this._state.availableShift) {//wave is growing, initialization
+        deltaWidthWaveLimiter = Math.abs(
+          this._throttled(
+            this._state.availableShift -
+            Math.abs(this._state.prev) -
+            Math.abs(swipeSizeX))
+        )
+      } else if (swipeSizeX >= 0) { // wave is growing, continued
+        deltaWidthWaveLimiter = this._state.waveLimiter.rightWidth +
+          this._throttled(swipeSizeX);
+      } else if (swipeSizeX < 0) {// wave decreases
+        deltaWidthWaveLimiter = this._state.waveLimiter.rightWidth - this._throttled(Math.abs(swipeSizeX));
+      }
+
+      this._state.setWaveLimiter({ rightWidth: deltaWidthWaveLimiter })
+      newPrew = this._state.prev - this._throttled(swipeSizeX);
+    }
+    return newPrew;
+  }
+
   _onTouchMove = event => {
     // ensure swiping with one touch and not pinching
     if (event.touches.length > 1 || (event.scale && event.scale !== 1)) return;
@@ -179,40 +220,7 @@ export default class SwiperX extends React.Component {
     let newPrew = this._state.prev - swipeSizeX;
     // newPrew = swipeSizeX > 0 ? newPrew : -newPrew;
 
-    if (newPrew > 0) { // for wave limiter left
-      let deltaWidthWaveLimiter = null;
-
-      if (this._state.prev <= 0 && swipeSizeX < 0) {//волна растет, инициализация
-        deltaWidthWaveLimiter = this._throttled(Math.abs(this._state.prev + swipeSizeX));
-      } else if (this._state.prev > 0 && swipeSizeX <= 0) {//волна растет, продолжение
-        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth + this._throttled(Math.abs(swipeSizeX));
-      } else if (swipeSizeX > 0) {//волна убывает
-        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth - this._throttled(Math.abs(swipeSizeX));
-      }
-
-      this._state.setWaveLimiter({ leftWidth: deltaWidthWaveLimiter })
-      newPrew = this._state.prev - this._throttled(swipeSizeX);
-    }
-
-    if (Math.abs(newPrew) > this._state.availableShift) {//for wave limiter right
-      let deltaWidthWaveLimiter = null;
-      if (Math.abs(this._state.prev) < this._state.availableShift) {//волна растет, инициализация
-        deltaWidthWaveLimiter = Math.abs(
-          this._throttled(
-            this._state.availableShift -
-            Math.abs(this._state.prev) -
-            Math.abs(swipeSizeX))
-        )
-      } else if (swipeSizeX >= 0) { // волна растет, продолжение
-        deltaWidthWaveLimiter = this._state.waveLimiter.rightWidth +
-          this._throttled(swipeSizeX);
-      } else if (swipeSizeX < 0) {// волна убывает
-        deltaWidthWaveLimiter = this._state.waveLimiter.rightWidth - this._throttled(Math.abs(swipeSizeX));
-      }
-
-      this._state.setWaveLimiter({ rightWidth: deltaWidthWaveLimiter })
-      newPrew = this._state.prev - this._throttled(swipeSizeX);
-    }
+    newPrew = this._withWaveLimiter(newPrew, swipeSizeX);
 
     this._state.setPrev(newPrew);
   };
