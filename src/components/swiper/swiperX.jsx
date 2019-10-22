@@ -155,6 +155,10 @@ export default class SwiperX extends React.Component {
     });
   };
 
+  _throttled = (value) => {
+    return value / 4;
+  };
+
   _onTouchMove = event => {
     // ensure swiping with one touch and not pinching
     if (event.touches.length > 1 || (event.scale && event.scale !== 1)) return;
@@ -171,34 +175,45 @@ export default class SwiperX extends React.Component {
     });
 
     // swipeSize < 0  --- swipe next // swipeSize > 0  --- swipe prev
-    /*
-    console.log("_onTouchMove", {
-      swipe__size: swipeSizeX,
-      prev__state: this._state.prev
-    });
-    */
+
     let newPrew = this._state.prev - swipeSizeX;
     // newPrew = swipeSizeX > 0 ? newPrew : -newPrew;
-    
+
     if (newPrew > 0) { // for wave limiter left
       let deltaWidthWaveLimiter = null;
-      if (this._state.prev < 0 && swipeSizeX < 0) {//волна растет 
-        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth + Math.abs(this._state.prev + swipeSizeX) / 3;
-      } else if (this._state.prev >= 0 && swipeSizeX < 0){//волна растет
-        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth + Math.abs(swipeSizeX) / 3;
-      } else if (this._state.prev < 0 && swipeSizeX > 0) {
-        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth - Math.abs(swipeSizeX) / 3;
 
+      if (this._state.prev <= 0 && swipeSizeX < 0) {//волна растет, инициализация
+        deltaWidthWaveLimiter = this._throttled(Math.abs(this._state.prev + swipeSizeX));
+      } else if (this._state.prev > 0 && swipeSizeX <= 0) {//волна растет, продолжение
+        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth + this._throttled(Math.abs(swipeSizeX));
+      } else if (swipeSizeX > 0) {//волна убывает
+        deltaWidthWaveLimiter = this._state.waveLimiter.leftWidth - this._throttled(Math.abs(swipeSizeX));
       }
 
-            log({
-        call: "_onTouchMove",
-        deltaPrev: deltaWidthWaveLimiter,
-        swipeSizeX: swipeSizeX
-      })
-      this._state.setWaveLimiter({leftWidth: deltaWidthWaveLimiter})
-
+      this._state.setWaveLimiter({ leftWidth: deltaWidthWaveLimiter })
+      newPrew = this._state.prev - this._throttled(swipeSizeX);
     }
+
+    if (Math.abs(newPrew) > this._state.availableShift) {//for wave limiter right
+      let deltaWidthWaveLimiter = null;
+      if (Math.abs(this._state.prev) < this._state.availableShift) {//волна растет, инициализация
+        deltaWidthWaveLimiter = Math.abs(
+          this._throttled(
+            this._state.availableShift -
+            Math.abs(this._state.prev) -
+            Math.abs(swipeSizeX))
+        )
+      } else if (swipeSizeX >= 0) { // волна растет, продолжение
+        deltaWidthWaveLimiter = this._state.waveLimiter.rightWidth +
+          this._throttled(swipeSizeX);
+      } else if (swipeSizeX < 0) {// волна убывает
+        deltaWidthWaveLimiter = this._state.waveLimiter.rightWidth - this._throttled(Math.abs(swipeSizeX));
+      }
+
+      this._state.setWaveLimiter({ rightWidth: deltaWidthWaveLimiter })
+      newPrew = this._state.prev - this._throttled(swipeSizeX);
+    }
+
     this._state.setPrev(newPrew);
   };
 
@@ -242,14 +257,14 @@ export default class SwiperX extends React.Component {
           this._state.stickyItem + Math.ceil(swipeSize / this._state.itemWidth);
         break;
     }
-/*
-    log({
-      call: " _getStickyItemForNext",
-      swipeSize: swipeSize,
-      availableNext: availableNext,
-      newStickyItem: newStickyItem
-    });
-*/
+    /*
+        log({
+          call: " _getStickyItemForNext",
+          swipeSize: swipeSize,
+          availableNext: availableNext,
+          newStickyItem: newStickyItem
+        });
+    */
     return newStickyItem;
   };
 
@@ -302,15 +317,15 @@ export default class SwiperX extends React.Component {
           this._state.stickyItem - Math.ceil(swipeSize / this._state.itemWidth);
         break;
     }
-/*
-    log({
-      call: " _getStickyItemForPrev",
-      case: caseItem,
-      swipeSize: swipeSize,
-      prev: this._state.prev,
-      newStickyItem: newStickyItem
-    });
-    */
+    /*
+        log({
+          call: " _getStickyItemForPrev",
+          case: caseItem,
+          swipeSize: swipeSize,
+          prev: this._state.prev,
+          newStickyItem: newStickyItem
+        });
+        */
     return newStickyItem;
   };
 
